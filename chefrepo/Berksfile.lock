@@ -1,0 +1,5 @@
+DEPENDENCIES
+  parted
+
+GRAPH
+  parted (2.1.3)
