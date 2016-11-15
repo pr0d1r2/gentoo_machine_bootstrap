@@ -8,4 +8,6 @@ with_marker_file :create_partition do
   execute "parted -s #{node[:system_disk][:device_by_id]} mkpart primary 0% 100% -a cylinder" do
     not_if { partition_exists?(node[:system_disk][:device_by_id], 1) }
   end
+
+  execute 'sleep 5'
 end
