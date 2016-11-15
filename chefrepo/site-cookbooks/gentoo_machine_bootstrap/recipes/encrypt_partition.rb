@@ -5,7 +5,7 @@ with_marker_file :encrypt_partition do
     --key-size=#{node[:system_disk][:luks][:key_size]}
     --offset=#{node[:system_disk][:luks][:key_offset]}
     --type plain
-    #{target_disk_from_id(node[:system_disk][:device_by_id])}1
+    /dev/#{target_disk_from_id(node[:system_disk][:device_by_id])}1
     #{node[:system_disk][:mapper_name]}
     --key-file /dev/urandom
   ].join(' ')

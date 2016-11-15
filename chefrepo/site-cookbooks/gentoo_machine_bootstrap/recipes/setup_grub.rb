@@ -1,4 +1,4 @@
-fail 'TODO'
+execute 'false'
 
 # GRUB_ENABLE_CRYPTODISK=y to /etc/default/grub
 # GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda1:#{node[:system_disk][:mapper_name]}"
