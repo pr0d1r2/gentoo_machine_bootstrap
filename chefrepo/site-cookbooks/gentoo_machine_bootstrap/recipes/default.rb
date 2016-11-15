@@ -13,6 +13,10 @@ include_recipe 'gentoo_machine_bootstrap::uncompress_gentoo'
 
 include_recipe 'gentoo_machine_bootstrap::mount_pseudo_filesystems'
 
+
+include_recipe 'gentoo_machine_bootstrap::chroot_sync_portage'
+include_recipe 'gentoo_machine_bootstrap::chroot_install_grub'
+include_recipe 'gentoo_machine_bootstrap::chroot_install_lvm2'
 include_recipe 'gentoo_machine_bootstrap::setup_grub'
 
 include_recipe 'gentoo_machine_bootstrap::remind_to_set_root_fs_luks_key'
