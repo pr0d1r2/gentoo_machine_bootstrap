@@ -1,13 +1,19 @@
 define :download_portage do
-  portage_version = '20161114'
-  portage_checksum = '587e3a7e07b1a8c562157fe866ecc0e64c9d5e8348c17c9bc99c6d220d6d3dcc'
+  portage_version = '20161119'
+  portage_checksum = 'e811ef0997e17e35eb208d7ff66cced13586f8363a91ec37f2bf0388ccc1fc55'
 
   download_portage_root = params[:name] || raise('give destination directory as first parameter')
 
   downloaded_file = "#{download_portage_root}/portage-#{portage_version}.tar.xz"
 
+  if node[:gentoo][:mirror][:subdirectories]
+    download_subdir = '/ftp/mirror/gentoo/snapshots'
+  else
+    download_subdir = ''
+  end
+
   remote_file downloaded_file do
-    source "http://mirror.switch.ch/ftp/mirror/gentoo/snapshots/portage-#{portage_version}.tar.xz"
+    source "#{node[:gentoo][:mirror][:path]}/#{download_subdir}/portage-#{portage_version}.tar.xz"
     checksum portage_checksum
   end
 
