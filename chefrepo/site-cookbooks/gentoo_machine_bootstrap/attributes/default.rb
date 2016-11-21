@@ -24,9 +24,9 @@ else
 end
 
 default[:gentoo] = {
-  release: 'cloud',
+  release: 'systemd',
   hardened: false,
-  stage: 4,
+  stage: 3,
   genkernel: true,
   mirror: {
     path: 'http://mirror.switch.ch',
