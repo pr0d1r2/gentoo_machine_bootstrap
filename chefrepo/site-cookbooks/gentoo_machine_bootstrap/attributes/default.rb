@@ -32,5 +32,5 @@ default[:gentoo] = {
     path: 'http://mirror.switch.ch',
     subdirectories: true
   },
-  pkg_source: 'http://192.168.1.228:8000'
+  pkg_source: 'https://raw.githubusercontent.com/pr0d1r2/gentoo_machine_bootstrap-assets/master'
 }
