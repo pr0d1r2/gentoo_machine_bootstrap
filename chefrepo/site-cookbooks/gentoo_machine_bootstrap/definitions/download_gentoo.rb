@@ -15,8 +15,8 @@ define :download_gentoo do
     when 'systemd'
       case download_gentoo_stage
       when 3
-        gentoo_version = '20161113'
-        gentoo_checksum = '8b0db2a7ebd80d2fa3ad4413c7a8815c9391dd46301bf79fad3f66d00a20e7ce'
+        gentoo_version = '20161118'
+        gentoo_checksum = '8dd7d510309633960571d07556e35d6236bf91b03d37b670afdd093cdb05f5c5'
         gentoo_basename = "stage3-amd64-systemd-#{gentoo_version}.tar.bz2"
         if node[:gentoo][:mirror][:subdirectories]
           gentoo_subdir = '/ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage3-amd64-systemd'
