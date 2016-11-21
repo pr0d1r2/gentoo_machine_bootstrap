@@ -37,6 +37,7 @@ with_marker_file :chroot_prepare_kernel_genkernel do
   execute "echo 'LUKS=\"yes\"' >> /mnt/gentoo/etc/genkernel.conf"
   execute "echo 'DISKLABEL=\"yes\"' >> /mnt/gentoo/etc/genkernel.conf"
   execute "echo 'BOOTLOADER=\"grub2\"' >> /mnt/gentoo/etc/genkernel.conf"
+  execute "echo 'MAKEOPTS=\"-j$(nproc)\"' >> /mnt/gentoo/etc/genkernel.conf"
 end
 
 with_marker_file :chroot_prepare_kernel_config do
@@ -50,9 +51,31 @@ with_marker_file :chroot_prepare_kernel_config do
   kernel_enable 'CONFIG_CRYPTO_XTS'
   kernel_enable 'CONFIG_CRYPTO_AES_X86_64'
   kernel_enable 'CONFIG_CRYPTO_AES_NI_INTEL'
+  kernel_enable 'CONFIG_USB_XHCI_HCD' if node[:system_disk][:usb]
 
   [node[:hardware]].flatten.each do |hardware|
     include_recipe "hardware::#{hardware}"
+  end
+
+  if node[:gentoo][:release] == 'systemd'
+    kernel_enable 'CONFIG_FHANDLE'
+    kernel_enable 'CONFIG_CGROUPS'
+    kernel_enable 'CONFIG_GENTOO_LINUX_INIT_SYSTEMD'
+    kernel_enable 'CONFIG_EXPERT'
+    kernel_enable 'CONFIG_EPOLL'
+    kernel_enable 'CONFIG_SIGNALFD'
+    kernel_enable 'CONFIG_TIMERFD'
+    kernel_enable 'CONFIG_EVENTFD'
+    kernel_enable 'CONFIG_NET'
+    kernel_enable 'CONFIG_DEVTMPFS'
+    kernel_enable 'CONFIG_INOTIFY_USER'
+    kernel_enable 'CONFIG_PROC_FS'
+    kernel_enable 'CONFIG_SYSFS'
+    # UEFI
+    kernel_enable 'CONFIG_PARTITION_ADVANCED'
+    kernel_enable 'CONFIG_EFI_PARTITION'
+    kernel_enable 'CONFIG_EFI'
+    kernel_enable 'CONFIG_EFI_VARS'
   end
 end
 

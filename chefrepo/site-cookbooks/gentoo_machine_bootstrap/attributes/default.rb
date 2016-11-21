@@ -1,4 +1,5 @@
 default[:system_disk] = {
+  usb: false,
   label: 'gpt',
   luks: {
     cipher: 'aes-xts-plain',

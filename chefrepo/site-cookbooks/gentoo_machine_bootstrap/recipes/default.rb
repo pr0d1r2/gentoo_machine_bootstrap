@@ -22,6 +22,8 @@ include_recipe 'gentoo_machine_bootstrap::chroot_set_locale'
 include_recipe 'gentoo_machine_bootstrap::chroot_sync_portage'
 include_recipe 'gentoo_machine_bootstrap::chroot_install_lvm2'
 include_recipe 'gentoo_machine_bootstrap::chroot_install_grub'
+include_recipe 'gentoo_machine_bootstrap::chroot_systemd' if node[:gentoo][:release] == 'systemd'
+
 
 include_recipe 'gentoo_machine_bootstrap::setup_grub'
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_kernel' if node[:gentoo][:genkernel]

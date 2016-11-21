@@ -48,7 +48,10 @@ if [ ! -f $D_R/nodes/$HOSTNAME.setup-done ]; then
 
   ssh-add ~/.ssh/id_rsa_$HOSTNAME
 
-  cp ~/.ssh/id_rsa_$HOSTNAME.pub $D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/files/id_rsa_$HOSTNAME.pub
+  if [ ! -d $D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/files/default ]; then
+    mkdir -p $D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/files/default
+  fi
+  cp ~/.ssh/id_rsa_$HOSTNAME.pub $D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/files/default/id_rsa_$HOSTNAME.pub
 
   echorun knife solo prepare ubuntu@$HOSTNAME || return $?
 

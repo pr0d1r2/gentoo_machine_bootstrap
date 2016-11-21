@@ -5,5 +5,5 @@ with_marker_file :chroot_set_locale do
 
   execute 'chroot /mnt/gentoo locale-gen'
 
-  execute 'chroot /mnt/gentoo localectl set-locale LANG=en_US.UTF8'
+  execute 'chroot /mnt/gentoo localectl set-locale LANG=en_US.UTF8' if node[:gentoo][:release] == 'systemd'
 end
