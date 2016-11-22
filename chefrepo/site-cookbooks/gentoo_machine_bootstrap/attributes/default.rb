@@ -35,3 +35,5 @@ default[:gentoo] = {
   },
   pkg_source: 'https://raw.githubusercontent.com/pr0d1r2/gentoo_machine_bootstrap-assets/master'
 }
+
+default[:testing] = false

@@ -1,4 +1,4 @@
-# include_recipe 'lvm2'
+# include_recipe 'lvm'
 
 with_marker_file :create_lvm_root do
   lvcreate_attributes = %W[

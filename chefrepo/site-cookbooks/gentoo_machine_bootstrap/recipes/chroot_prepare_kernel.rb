@@ -53,7 +53,7 @@ with_marker_file :chroot_prepare_kernel_config do
   kernel_enable 'CONFIG_CRYPTO_AES_NI_INTEL'
   kernel_enable 'CONFIG_USB_XHCI_HCD' if node[:system_disk][:usb]
 
-  [node[:hardware]].flatten.each do |hardware|
+  [node[:hardware]].flatten.compact.each do |hardware|
     include_recipe "hardware::#{hardware}"
   end
 

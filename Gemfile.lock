@@ -31,6 +31,7 @@ GEM
     buff-shell_out (1.1.0)
       buff-ruby_engine (~> 1.0)
     builder (3.2.2)
+    cargo (0.0.3)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     celluloid-io (0.16.2)
@@ -135,6 +136,8 @@ GEM
       plist (~> 3.1)
       systemu (~> 2.6.4)
       wmi-lite (~> 1.0)
+    packer (0.1.0)
+      cargo
     plist (3.2.0)
     proxifier (1.0.3)
     rack (2.0.1)
@@ -211,6 +214,7 @@ PLATFORMS
 DEPENDENCIES
   berkshelf
   knife-solo
+  packer
 
 BUNDLED WITH
    1.12.5

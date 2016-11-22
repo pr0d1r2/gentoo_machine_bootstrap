@@ -1,5 +1,9 @@
 DEPENDENCIES
+  dm-crypt
+  lvm
   parted
 
 GRAPH
+  dm-crypt (0.1.0)
+  lvm (3.1.0)
   parted (2.1.3)

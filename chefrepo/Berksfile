@@ -1,4 +1,5 @@
 site :opscode
 
 cookbook 'parted'
-cookbook 'lvm2'
+cookbook 'lvm'
+cookbook 'dm-crypt'

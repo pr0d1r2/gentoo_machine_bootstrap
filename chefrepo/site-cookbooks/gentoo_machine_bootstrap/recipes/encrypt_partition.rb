@@ -1,5 +1,12 @@
+# include_recipe 'dm-crypt'
+
 with_marker_file :encrypt_partition do
   execute "dd bs=512 count=4 if=/dev/urandom of=#{node[:system_disk][:luks][:tmp_key_file]} iflag=fullblock" do
+    not_if { node[:testing] || File.exist?(node[:system_disk][:luks][:tmp_key_file]) }
+  end
+
+  execute "echo -n testtest > #{node[:system_disk][:luks][:tmp_key_file]}" do
+    only_if { node[:testing] }
     not_if { File.exist?(node[:system_disk][:luks][:tmp_key_file]) }
   end
 

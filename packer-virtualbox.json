@@ -1,0 +1,68 @@
+{
+  "builders": [
+    {
+      "disk_size": 60000,
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "24576"],
+        ["modifyvm", "{{.Name}}", "--cpus", "24"]
+      ],
+      "headless": false,
+      "boot_wait": "3s",
+      "boot_command": [
+        "<enter>",
+        "<wait10><wait10>",
+        "user",
+        "<enter>",
+        "live",
+        "<enter>",
+        "sudo bash",
+        "<enter>",
+        "sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config",
+        "<enter>",
+        "/etc/init.d/ssh restart",
+        "<enter>",
+        "<wait5>"
+      ],
+      "hard_drive_interface": "sata",
+      "type": "virtualbox-iso",
+      "guest_os_type": "Debian_64",
+      "iso_url": "http://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-8.6.0-amd64-standard.iso",
+      "iso_checksum": "06b3cc0a1430c2aaf449b46c72fecee5",
+      "iso_checksum_type": "md5",
+      "ssh_username": "user",
+      "ssh_password": "live",
+      "shutdown_command": "sudo -S shutdown -P now"
+    }
+  ],
+  "description": "Faithful Stage 3 Gentoo Installation (VirtualBox)",
+  "post-processors": [
+    {
+      "output": "gentoo-amd64-stage3-virtualbox.box",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": ["sudo apt-get install -y curl parted cryptsetup"]
+    },
+    {
+      "type": "chef-solo",
+      "cookbook_paths": [
+        "chefrepo/site-cookbooks",
+        "chefrepo/cookbooks"
+      ],
+      "run_list": [
+        "gentoo_machine_bootstrap"
+      ],
+      "json": {
+        "arch": "x86_64",
+        "testing": true,
+        "system_disk": {
+          "usb": true,
+          "device_by_id": "/dev/sda"
+        }
+      }
+    }
+  ]
+}
