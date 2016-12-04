@@ -2,7 +2,7 @@
 
 # Use it to mount already finished installation
 
-cryptsetup luksOpen /dev/sda1 root
+cryptsetup luksOpen /dev/sda2 root
 mkdir /mnt/gentoo
 mount /dev/mapper/root /mnt/gentoo/
 mount --rbind /dev/ /mnt/gentoo/dev/

@@ -25,7 +25,7 @@ else
 end
 
 default[:gentoo] = {
-  release: 'systemd',
+  release: 'vanilla',
   hardened: false,
   stage: 3,
   genkernel: true,
@@ -37,3 +37,5 @@ default[:gentoo] = {
 }
 
 default[:testing] = false
+
+default[:gentoo][:genkernel] = true if node[:gentoo][:stage] < 4

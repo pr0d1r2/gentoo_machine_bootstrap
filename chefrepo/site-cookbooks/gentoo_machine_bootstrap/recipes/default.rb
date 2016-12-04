@@ -25,10 +25,12 @@ include_recipe 'gentoo_machine_bootstrap::chroot_install_lvm2'
 include_recipe 'gentoo_machine_bootstrap::chroot_install_grub'
 include_recipe 'gentoo_machine_bootstrap::chroot_systemd' if node[:gentoo][:release] == 'systemd'
 
-
+include_recipe 'gentoo_machine_bootstrap::chroot_prepare_fstab'
 include_recipe 'gentoo_machine_bootstrap::setup_grub'
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_kernel' if node[:gentoo][:genkernel]
-include_recipe 'gentoo_machine_bootstrap::chroot_prepare_fstab'
+
+include_recipe 'gentoo_machine_bootstrap::chroot_prepare_network'
+include_recipe 'gentoo_machine_bootstrap::chroot_prepare_sshd'
 
 include_recipe 'gentoo_machine_bootstrap::remind_to_set_root_fs_luks_key' unless node[:testing]
 include_recipe 'gentoo_machine_bootstrap::remind_to_set_root_password' unless node[:testing]

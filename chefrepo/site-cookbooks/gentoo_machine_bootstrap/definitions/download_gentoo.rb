@@ -12,6 +12,18 @@ define :download_gentoo do
   case download_gentoo_arch
   when 'x86_64'
     case download_gentoo_release
+    when 'vanilla'
+      case download_gentoo_stage
+      when 3
+        gentoo_version = '20161117'
+        gentoo_checksum = '43ed4ff512f84e2014a41b850b63c864cd1f528d467ec7b75cc1fc36724b9903'
+        gentoo_basename = "stage3-amd64-#{gentoo_version}.tar.bz2"
+        if node[:gentoo][:mirror][:subdirectories]
+          gentoo_subdir = 'ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage3-amd64'
+        end
+      else
+        raise "Unknown stage: #{download_gentoo_stage} (for release #{download_gentoo_release})"
+      end
     when 'systemd'
       case download_gentoo_stage
       when 3

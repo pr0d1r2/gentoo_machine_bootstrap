@@ -11,7 +11,7 @@ execute "echo #{contents} >> #{file}" do
 end
 
 contents = %W[
-  GRUB_CMDLINE_LINUX="crypt_root=/dev/sda1
+  GRUB_CMDLINE_LINUX="crypt_root=/dev/sda2
                       rootfstype=ext4
                       real_root=#{node[:system_disk][:target_partition]}
                       initrd=/dev/ram0

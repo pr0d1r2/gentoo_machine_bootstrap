@@ -6,20 +6,20 @@ with_marker_file :create_partition do
   end
 
   if node[:system_disk][:label] == 'gpt'
-    execute "parted -s #{node[:system_disk][:device_by_id]} mkpart primary 0% 99% -a cylinder" do
+    execute "parted -s #{node[:system_disk][:device_by_id]} mkpart primary 0% 100M -a cylinder" do
       not_if { partition_exists?(node[:system_disk][:device_by_id], 1) }
     end
 
-    execute "parted -s #{node[:system_disk][:device_by_id]} mkpart bios_grub 99% 100% -a cylinder" do
+    execute "parted -s #{node[:system_disk][:device_by_id]} mkpart bios_grub 100M 100% -a cylinder" do
       not_if { partition_exists?(node[:system_disk][:device_by_id], 2) }
     end
 
-    execute "parted -s #{node[:system_disk][:device_by_id]} set 2 bios_grub on"
+    execute "parted -s #{node[:system_disk][:device_by_id]} set 1 bios_grub on"
 
     parts = [1, 2]
   else
-    # NOTE: start partition from 1% to leave space for grub embedding
-    execute "parted -s #{node[:system_disk][:device_by_id]} mkpart primary 1% 100% -a cylinder" do
+    # NOTE: start partition from 100M to leave space for grub embedding
+    execute "parted -s #{node[:system_disk][:device_by_id]} mkpart primary 100M 100% -a cylinder" do
       not_if { partition_exists?(node[:system_disk][:device_by_id], 1) }
     end
 

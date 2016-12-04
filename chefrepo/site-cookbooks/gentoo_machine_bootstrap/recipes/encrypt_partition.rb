@@ -16,7 +16,7 @@ with_marker_file :encrypt_partition do
     --key-size=#{node[:system_disk][:luks][:key_size]}
     --offset=#{node[:system_disk][:luks][:key_offset]}
     --batch-mode
-    /dev/#{target_disk_from_id(node[:system_disk][:device_by_id])}1
+    /dev/#{target_disk_from_id(node[:system_disk][:device_by_id])}2
     --key-file #{node[:system_disk][:luks][:tmp_key_file]}
   ].join(' ')
 
