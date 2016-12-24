@@ -27,6 +27,7 @@ end
 default[:gentoo] = {
   release: 'vanilla',
   hardened: false,
+  chefdk: true,
   stage: 3,
   genkernel: true,
   mirror: {

@@ -32,6 +32,8 @@ include_recipe 'gentoo_machine_bootstrap::chroot_prepare_kernel' if node[:gentoo
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_network'
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_sshd'
 
+include_recipe 'gentoo_machine_bootstrap::chroot_chefdk' unless node[:gentoo][:chefdk]
+
 include_recipe 'gentoo_machine_bootstrap::remind_to_set_root_fs_luks_key' unless node[:testing]
 include_recipe 'gentoo_machine_bootstrap::remind_to_set_root_password' unless node[:testing]
 
