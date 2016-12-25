@@ -2,3 +2,4 @@
 nodes
 chefrepo/site-cookbooks/gentoo_machine_bootstrap/files
 packer_cache
+packer-virtualbox.json

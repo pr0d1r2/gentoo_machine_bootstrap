@@ -3,8 +3,8 @@
     {
       "disk_size": 60000,
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--memory", "24576"],
-        ["modifyvm", "{{.Name}}", "--cpus", "24"]
+        ["modifyvm", "{{.Name}}", "--memory", "MEMORY"],
+        ["modifyvm", "{{.Name}}", "--cpus", "CPU_NUM"]
       ],
       "headless": false,
       "boot_wait": "3s",
