@@ -72,7 +72,7 @@
           }
         }
       },
-      "execute_command": "sed -i \"s|PACKER_CACHE_URL|`cat /packer_cache.url`|g\" {{.JsonPath}} && {{if .Sudo}}sudo {{end}}chef-solo --no-color -c {{.ConfigPath}} -j {{.JsonPath}}"
+      "execute_command": "sed -i \"s|PACKER_CACHE_URL|`cat /packer_cache.url`|g\" {{.JsonPath}} && {{if .Sudo}}sudo {{end}}chef-solo --no-color -c {{.ConfigPath}} -j {{.JsonPath}} && {{if .Sudo}}sudo {{end}} rm -rf /mnt/gentoo/portage/distfiles"
     }
   ]
 }
