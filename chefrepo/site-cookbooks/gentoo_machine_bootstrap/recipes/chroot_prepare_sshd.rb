@@ -11,7 +11,7 @@ with_marker_file :chroot_prepare_sshd do
   end
 
   cookbook_file '/mnt/gentoo/root/.ssh/authorized_keys' do
-    source "id_rsa_#{node[:automatic][:ipaddress]}.pub"
+    source "id_rsa_#{node[:authorized_key_name]}.pub"
     owner 'root'
     mode '0600'
   end

@@ -40,3 +40,9 @@ default[:gentoo] = {
 default[:testing] = false
 
 default[:gentoo][:genkernel] = true if node[:gentoo][:stage] < 4
+
+if node[:automatic] && node[:automatic][:ipaddress]
+  default[:authorized_key_name] = node[:automatic][:ipaddress]
+else
+  default[:authorized_key_name] = 'default'
+end
