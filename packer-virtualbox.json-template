@@ -6,7 +6,7 @@
         ["modifyvm", "{{.Name}}", "--memory", "MEMORY"],
         ["modifyvm", "{{.Name}}", "--cpus", "CPU_NUM"]
       ],
-      "headless": false,
+      "headless": true,
       "boot_wait": "3s",
       "boot_command": [
         "<enter>",
