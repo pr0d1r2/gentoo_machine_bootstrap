@@ -15,8 +15,8 @@ define :download_gentoo do
     when 'vanilla'
       case download_gentoo_stage
       when 3
-        gentoo_version = '20161117'
-        gentoo_checksum = '43ed4ff512f84e2014a41b850b63c864cd1f528d467ec7b75cc1fc36724b9903'
+        gentoo_version = '20161222'
+        gentoo_checksum = '402a2bc26e369c83d757d5b40e40a7749b462039f10ee80eb0e5ffb575c09759'
         gentoo_basename = "stage3-amd64-#{gentoo_version}.tar.bz2"
         if node[:gentoo][:mirror][:subdirectories]
           gentoo_subdir = 'ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage3-amd64'
