@@ -28,7 +28,7 @@ with_marker_file :chroot_prepare_kernel_genkernel do
       checksum '99d74eece725439c548e55ce62416bdc4d20e64267dd9d98931a11ff83038642'
     end
 
-    execute 'USE="cryptsetup" chroot /mnt/gentoo emerge --usepkgonly genkernel'
+    execute 'USE="cryptsetup" chroot /mnt/gentoo emerge --usepkg genkernel'
   end
 
   execute "echo 'OLDCONFIG=\"no\"' >> /mnt/gentoo/etc/genkernel.conf"

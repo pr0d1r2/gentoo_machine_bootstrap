@@ -11,6 +11,6 @@ with_marker_file :chroot_install_lvm2 do
     checksum 'ff97b4f61ed74eced430ba4b65c665f816cbc03e558d74d95edbad4cfc044369'
   end
 
-  execute 'USE="device-mapper -thin" chroot /mnt/gentoo emerge --usepkgonly lvm2'
+  execute 'USE="device-mapper -thin" chroot /mnt/gentoo emerge --usepkg lvm2'
 end
 

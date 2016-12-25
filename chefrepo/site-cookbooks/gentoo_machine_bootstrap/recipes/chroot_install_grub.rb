@@ -7,5 +7,5 @@ with_marker_file :chroot_install_grub do
     checksum '01f3ea857c530f0a579d42079c3fd5cc7851acfd924d99779fbaea45c56846ba'
   end
 
-  execute 'USE="device-mapper -thin" chroot /mnt/gentoo emerge --usepkgonly grub'
+  execute 'USE="device-mapper -thin" chroot /mnt/gentoo emerge --usepkg grub'
 end
