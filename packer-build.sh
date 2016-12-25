@@ -18,18 +18,6 @@ cat $D_R/packer-virtualbox.json-template | \
   sed -e "s/CPU_NUM/$CPU_NUM/g" | \
   sed -e "s/MEMORY/$MEMORY/g" > $D_R/packer-virtualbox.json
 
-function setup_local_ssh_key() {
-  if [ ! -f $HOME/.ssh/id_rsa_$1 ]; then
-    echorun ssh-keygen -b 4096 -f $HOME/.ssh/id_rsa_$1 -C $1@`hostname` -o -a 500 || return $?
-  fi
-
-  if [ ! -d $D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/files/default ]; then
-    mkdir -p $D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/files/default || return $?
-  fi
-  cp ~/.ssh/id_rsa_$1.pub $D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/files/default/id_rsa_$1.pub || return $?
-  ssh-add ~/.ssh/id_rsa_$1 || return $?
-}
-
 setup_local_ssh_key default || return $?
 
 echorun packer build $D_R/packer-virtualbox.json || return $?
