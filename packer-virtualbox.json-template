@@ -76,7 +76,7 @@
     },
     {
       "type": "shell",
-      "inline": ["{{if .Sudo}}sudo {{end}} rm -rf /mnt/gentoo/portage/distfiles"]
+      "inline": ["{{if .Sudo}}sudo {{end}}rm -rf /mnt/gentoo/portage/distfiles"]
     },
   ]
 }
