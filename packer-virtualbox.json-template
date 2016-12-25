@@ -47,7 +47,7 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": ["sudo apt-get install -y curl parted cryptsetup"]
+      "inline": ["{{if .Sudo}}sudo {{end}}apt-get install -y curl parted cryptsetup"]
     },
     {
       "type": "chef-solo",
