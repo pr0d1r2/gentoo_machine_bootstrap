@@ -46,11 +46,11 @@ function cache_gentoo_and_portage() {
     $PORTAGE_CHECKSUM || return $?
 }
 
-echorun ensure_command axel || return $?
-echorun ensure_command packer || return $?
-echorun ensure_command VBoxManage Caskroom/cask/virtualbox Caskroom/cask/virtualbox-extension-pack || return $?
+echorun ensure_command axel || exit $?
+echorun ensure_command packer || exit $?
+echorun ensure_command VBoxManage Caskroom/cask/virtualbox Caskroom/cask/virtualbox-extension-pack || exit $?
 
-CPU_NUM=`cpu_num` || return $?
+CPU_NUM=`cpu_num` || exit $?
 if [ $? -gt 0 ]; then
   echo 'Unable to determine number of logical cores'
   return 1001
@@ -61,8 +61,8 @@ cat $D_R/packer-virtualbox.json-template | \
   sed -e "s/CPU_NUM/$CPU_NUM/g" | \
   sed -e "s/MEMORY/$MEMORY/g" > $D_R/packer-virtualbox.json
 
-setup_local_ssh_key default || return $?
+setup_local_ssh_key default || exit $?
 
 cache_gentoo_and_portage || exit $?
 
-echorun packer build $D_R/packer-virtualbox.json || return $?
+echorun packer build $D_R/packer-virtualbox.json || exit $?
