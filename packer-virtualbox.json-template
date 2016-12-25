@@ -7,6 +7,7 @@
         ["modifyvm", "{{.Name}}", "--cpus", "CPU_NUM"]
       ],
       "headless": true,
+      "http_directory": "packer_cache",
       "boot_wait": "3s",
       "boot_command": [
         "<enter>",
@@ -16,6 +17,8 @@
         "live",
         "<enter>",
         "sudo bash",
+        "<enter>",
+        "echo 'http://{{ .HTTPIP }}:{{ .HTTPPort }}' > /packer_cache.url",
         "<enter>",
         "sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config",
         "<enter>",
@@ -61,8 +64,15 @@
         "system_disk": {
           "usb": true,
           "device_by_id": "/dev/sda"
+        },
+        "gentoo": {
+          "mirror": {
+            "path": "PACKER_CACHE_URL",
+            "subdirectories": false
+          }
         }
-      }
+      },
+      "execute_command": "sed -i \"s|PACKER_CACHE_URL|`cat /packer_cache.url`|g\" {{.JsonPath}} && {{if .Sudo}}sudo {{end}}chef-solo --no-color -c {{.ConfigPath}} -j {{.JsonPath}}"
     }
   ]
 }
