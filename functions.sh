@@ -55,6 +55,33 @@ function setup_local_ssh_key() {
   ssh-add ~/.ssh/id_rsa_$1 || return $?
 }
 
+function sha256hash() {
+  shasum -a 256 $1 | cut -f 1 -d ' '
+}
+
+function confirm_checksum() {
+  local confirm_checksum_SUM=`sha256hash $1`
+  case $confirm_checksum_SUM in
+    $2)
+      ;;
+    *)
+      echo "Bad checksum for $1 (REMOVING) [expected: $2, was $confirm_checksum_SUM]"
+      rm -f $1
+      return 101
+      ;;
+  esac
+}
+
+function download_with_checksum() {
+  local download_with_checksum_BASENAME=`basename $1`
+  cd $D_R/packer_cache || return $?
+  if [ ! -f $download_with_checksum_BASENAME ]; then
+    axel $1 || return $?
+  fi
+  confirm_checksum `pwd -P`/$download_with_checksum_BASENAME $2 || return $?
+  cd - &>/dev/null
+}
+
 function ensure_command() {
   local ensure_command_COMMAND=$1
   case $2 in
