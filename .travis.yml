@@ -1,7 +1,8 @@
 language: bash
 
 install:
-  - sudo apt-get update openssh
+  - sudo apt-get update
+  - sudo apt-get upgrade openssh
 
 script:
   - bash packer-build.sh
