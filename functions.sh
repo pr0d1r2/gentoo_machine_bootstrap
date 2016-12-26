@@ -29,10 +29,10 @@ function ssh_keygen_old_ssh() {
 
 function setup_local_ssh_key() {
   if [ ! -f $HOME/.ssh/id_rsa_$1 ]; then
-    ssh -V | grep -q "^OpenSSH"
+    ssh -V 2>&1 | grep -q "^OpenSSH"
     if [ $? -eq 0 ]; then
-      local setup_local_ssh_key_SSH_VERSION_MAJOR=`ssh -V | cut -f 1 -d , | cut -f 2 -d _ | cut -f 1 -d .`
-      local setup_local_ssh_key_SSH_VERSION_MINOR=`ssh -V | cut -f 1 -d , | cut -f 2 -d _ | cut -f 2 -d . | cut -f 1 -d p`
+      local setup_local_ssh_key_SSH_VERSION_MAJOR=`ssh -V 2>&1 | cut -f 1 -d , | cut -f 2 -d _ | cut -f 1 -d .`
+      local setup_local_ssh_key_SSH_VERSION_MINOR=`ssh -V 2>&1 | cut -f 1 -d , | cut -f 2 -d _ | cut -f 2 -d . | cut -f 1 -d p`
       if [ $setup_local_ssh_key_SSH_VERSION_MAJOR -eq 6 ]; then
         if [ $setup_local_ssh_key_SSH_VERSION_MINOR -lt 5 ]; then
           ssh_keygen_old_ssh || exit $?
