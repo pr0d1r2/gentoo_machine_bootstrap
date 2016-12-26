@@ -24,7 +24,8 @@ function bundler_threads() {
 }
 
 function ssh_keygen_old_ssh() {
-  echorun "ssh-keygen -b 4096 -f $HOME/.ssh/id_rsa_$1 -C $1@`hostname` -a 500 -N ''" || return $?
+  echo ssh-keygen
+  ssh-keygen -b 4096 -f $HOME/.ssh/id_rsa_$1 -C $1@`hostname` -a 500 -N '' || return $?
 }
 
 function setup_local_ssh_key() {
@@ -40,7 +41,8 @@ function setup_local_ssh_key() {
       elif [ $setup_local_ssh_key_SSH_VERSION_MAJOR -lt 6 ]; then
         ssh_keygen_old_ssh || exit $?
       else
-        echorun "ssh-keygen -b 4096 -f $HOME/.ssh/id_rsa_$1 -C $1@`hostname` -o -a 500 -N ''" || return $?
+        echo ssh-keygen
+        echorun ssh-keygen -b 4096 -f $HOME/.ssh/id_rsa_$1 -C $1@`hostname` -o -a 500 -N '' || return $?
       fi
     else
       echo "There is no openssh!"
