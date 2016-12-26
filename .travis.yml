@@ -3,6 +3,7 @@ language: bash
 install:
   - sudo apt-get update
   - sudo apt-get install axel
+  - sudo apt-get install virtualbox virtualbox-ext-pack
 
 script:
   - bash packer-build.sh
