@@ -79,7 +79,14 @@ function download_with_checksum() {
   fi
   cd $D_R/packer_cache || return $?
   if [ ! -f $download_with_checksum_BASENAME ]; then
-    axel $1 || return $?
+    case $3 in
+      --wget)
+        wget $1 || return $?
+        ;;
+      *)
+        axel $1 || return $?
+        ;;
+    esac
   fi
   confirm_checksum `pwd -P`/$download_with_checksum_BASENAME $2 || return $?
   cd - &>/dev/null
@@ -106,7 +113,8 @@ function ensure_command() {
           packer)
             download_with_checksum \
               https://releases.hashicorp.com/packer/0.12.1/packer_0.12.1_linux_amd64.zip \
-              456e6245ea95705191a64e0556d7a7ecb7db570745b3b4b2e1ebf92924e9ef95 || return 5005
+              456e6245ea95705191a64e0556d7a7ecb7db570745b3b4b2e1ebf92924e9ef95 \
+              --wget || return 5005
             echorun unzip $D_R/packer_cache/packer_0.12.1_linux_amd64.zip || retutn 5006
             ;;
           *)
