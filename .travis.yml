@@ -2,7 +2,7 @@ language: bash
 
 install:
   - sudo apt-get update
-  - sudo apt-get upgrade openssh -y
+  - sudo apt-get upgrade -yq openssh
 
 script:
   - bash packer-build.sh
