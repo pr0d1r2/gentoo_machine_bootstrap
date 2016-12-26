@@ -74,6 +74,9 @@ function confirm_checksum() {
 
 function download_with_checksum() {
   local download_with_checksum_BASENAME=`basename $1`
+  if [ ! -d $D_R/packer_cache ]; then
+    mkdir -p $D_R/packer_cache || return $?
+  fi
   cd $D_R/packer_cache || return $?
   if [ ! -f $download_with_checksum_BASENAME ]; then
     axel $1 || return $?
