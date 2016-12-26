@@ -1,4 +1,7 @@
 language: bash
 
+install:
+  - sudo apt-get install axel
+
 script:
   - bash packer-build.sh
