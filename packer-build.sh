@@ -1,6 +1,7 @@
 #!/bin/sh
 
 D_R=`cd \`dirname $0\` ; pwd -P`
+export PATH="$D_R:$PATH"
 
 source $D_R/functions.sh || return $?
 

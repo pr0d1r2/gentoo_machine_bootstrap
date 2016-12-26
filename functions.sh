@@ -71,9 +71,19 @@ function ensure_command() {
       Darwin)
         echorun brew install $ensure_command_PACKAGE || return $?
         ;;
-      *)
-        echo "Please install package for command $ensure_command_COMMAND"
-        return 8472
+      Linux)
+        case $ensure_command_COMMAND in
+          packer)
+            download_with_checksum \
+              https://releases.hashicorp.com/packer/0.12.1/packer_0.12.1_linux_amd64.zip \
+              456e6245ea95705191a64e0556d7a7ecb7db570745b3b4b2e1ebf92924e9ef95 || return 5005
+            echorun unzip packer_0.12.1_linux_amd64.zip || retutn 5006
+            ;;
+          *)
+            echo "Please install package for command $ensure_command_COMMAND"
+            return 8472
+            ;;
+        esac
         ;;
     esac
   fi
