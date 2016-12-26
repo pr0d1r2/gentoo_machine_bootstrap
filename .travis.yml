@@ -1,8 +1,4 @@
 language: bash
 
-install:
-  - sudo apt-get update
-  - DEBIAN_FRONTEND=noninteractive sudo apt-get upgrade -yq openssh
-
 script:
   - bash packer-build.sh
