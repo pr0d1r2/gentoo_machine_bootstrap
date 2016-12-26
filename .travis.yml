@@ -1,4 +1,7 @@
 language: bash
 
+install:
+  - apt-get update openssh
+
 script:
   - bash packer-build.sh
