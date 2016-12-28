@@ -8,8 +8,6 @@ install:
   - sudo dpkg-reconfigure virtualbox-dkms
   - sudo dpkg-reconfigure virtualbox
   - sudo apt-get --reinstall install virtualbox-dkms
-  - sudo modprobe vboxdrv
-  - sudo modprobe vboxnetflt
 
 script:
   - bash packer-build.sh
