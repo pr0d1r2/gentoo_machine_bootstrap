@@ -8,6 +8,7 @@ install:
   - sudo dpkg-reconfigure virtualbox-dkms
   - sudo dpkg-reconfigure virtualbox
   - sudo apt-get --reinstall install virtualbox-dkms
+  - sudo /etc/init.d/vboxdrv setup
 
 script:
   - bash packer-build.sh
