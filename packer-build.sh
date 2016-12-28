@@ -39,4 +39,9 @@ setup_local_ssh_key default || exit $?
 
 cache_gentoo_and_portage || exit $?
 
+bundle install || return $?
+cd chefrepo || return $?
+berks install || return $?
+cd - || return $?
+
 echorun packer build $D_R/packer-virtualbox.json || exit $?
