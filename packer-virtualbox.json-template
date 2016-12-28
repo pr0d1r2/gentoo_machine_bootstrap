@@ -52,8 +52,7 @@
     {
       "type": "chef-solo",
       "cookbook_paths": [
-        "chefrepo/site-cookbooks",
-        "chefrepo/cookbooks"
+        "chefrepo/site-cookbooks"
       ],
       "run_list": [
         "gentoo_machine_bootstrap"
