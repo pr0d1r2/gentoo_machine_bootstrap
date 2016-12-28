@@ -54,6 +54,7 @@ function setup_local_ssh_key() {
     mkdir -p $D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/files/default || return $?
   fi
   cp ~/.ssh/id_rsa_$1.pub $D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/files/default/id_rsa_$1.pub || return $?
+  ssh-agent || return $?
   ssh-add ~/.ssh/id_rsa_$1 || return $?
 }
 
