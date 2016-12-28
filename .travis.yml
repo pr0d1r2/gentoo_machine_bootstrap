@@ -4,10 +4,10 @@ install:
   - sudo apt-get update
   - sudo apt-get install axel
   - sudo apt-get install linux-headers-generic
-  - sudo apt-get install virtualbox virtualbox-ose-dkms
+  - sudo apt-get install virtualbox virtualbox-dkms
   - sudo dpkg-reconfigure virtualbox-ose-dkms
   - sudo dpkg-reconfigure virtualbox
-  - sudo apt-get --reinstall install virtualbox-ose-dkms
+  - sudo apt-get --reinstall install virtualbox-dkms
   - sudo modprobe vboxdrv
   - sudo modprobe vboxnetflt
 
