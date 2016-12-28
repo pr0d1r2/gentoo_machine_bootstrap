@@ -75,7 +75,7 @@
     },
     {
       "type": "file",
-      "source": "/mnt/gentoo/portage/packages",
+      "source": "/mnt/gentoo/usr/portage/package",
       "destination": "packer_cache/packages",
       "direction": "download"
     },
