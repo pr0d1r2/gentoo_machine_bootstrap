@@ -3,7 +3,7 @@ language: bash
 install:
   - sudo apt-get update
   - sudo apt-get install axel
-  - sudo apt-get install virtualbox
+  - sudo apt-get install virtualbox virtualbox-ose-dkms
 
 script:
   - bash packer-build.sh
