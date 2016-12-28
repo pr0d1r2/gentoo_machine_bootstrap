@@ -74,6 +74,12 @@
       "execute_command": "sed -i \"s|PACKER_CACHE_URL|`cat /packer_cache.url`|g\" {{.JsonPath}} && {{if .Sudo}}sudo {{end}}chef-solo --no-color -c {{.ConfigPath}} -j {{.JsonPath}}"
     },
     {
+      "type": "file",
+      "source": "/mnt/gentoo/portage/packages",
+      "destination": "packer_cache/packages",
+      "direction": "download"
+    },
+    {
       "type": "shell",
       "inline": ["{{if .Sudo}}sudo {{end}}rm -rf /mnt/gentoo/portage/distfiles"]
     }
