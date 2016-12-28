@@ -7,6 +7,7 @@ install:
   - sudo apt-get install virtualbox virtualbox-ose-dkms
   - sudo dpkg-reconfigure virtualbox-ose-dkms
   - sudo dpkg-reconfigure virtualbox
+  - sudo apt-get --reinstall install virtualbox-ose-dkms
   - sudo modprobe vboxdrv
   - sudo modprobe vboxnetflt
 
