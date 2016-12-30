@@ -37,7 +37,7 @@ with_marker_file :chroot_prepare_kernel_genkernel do
   genkernel_use 'LUKS="yes"'
   genkernel_use 'DISKLABEL="yes"'
   genkernel_use 'BOOTLOADER="grub2"'
-  genkernel_use 'MAKEOPTS="-j$(nproc)"'
+  genkernel_use 'MAKEOPTS="-j' + `nproc`.strip + '"'
   genkernel_use 'ZFS="no"'
 
   genkernel_use 'UDEV="yes"' do
