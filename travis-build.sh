@@ -13,4 +13,6 @@ echorun cp ~/.ssh/id_rsa_default.pub ~/.ssh/authorized_keys || exit $?
 echorun cp ~/.ssh/id_rsa_default ~/.ssh/id_rsa_$THE_HOSTNAME || exit $?
 echorun cp ~/.ssh/id_rsa_default.pub ~/.ssh/id_rsa_$THE_HOSTNAME.pub || exit $?
 
+ssh-keyscan $THE_HOSTNAME >> ~/.ssh/known_hosts || exit $?
+
 echorun bash ./setup_ubuntu.sh $THE_HOSTNAME || exit $?

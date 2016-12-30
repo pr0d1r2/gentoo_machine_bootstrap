@@ -19,7 +19,7 @@ if [ ! -f $D_R/nodes/$HOSTNAME.setup-done ]; then
   setup_local_ssh_key $HOSTNAME || exit $?
 
   ssh ubuntu@$HOSTNAME 'mkdir ~/.ssh/'
-  echorun scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $HOME/.ssh/id_rsa_$HOSTNAME.pub ubuntu@$HOSTNAME:~/.ssh/authorized_keys || exit $?
+  echorun scp $HOME/.ssh/id_rsa_$HOSTNAME.pub ubuntu@$HOSTNAME:~/.ssh/authorized_keys || exit $?
 
   cat $HOME/.ssh/config | grep -q "^Host $HOSTNAME$"
   if [ $? -gt 0 ]; then
