@@ -1,5 +1,6 @@
 .bundle
-nodes
+nodes/*
+!nodes/127.0.0.1.json
 chefrepo/site-cookbooks/gentoo_machine_bootstrap/files
 packer_cache
 packer-virtualbox.json

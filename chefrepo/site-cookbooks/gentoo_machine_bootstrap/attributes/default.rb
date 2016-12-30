@@ -38,6 +38,8 @@ default[:gentoo] = {
 }
 
 default[:testing] = false
+default[:testing_on_travis] = false
+default[:testing] = true if node[:testing_on_travis]
 
 default[:gentoo][:genkernel] = true if node[:gentoo][:stage] < 4
 

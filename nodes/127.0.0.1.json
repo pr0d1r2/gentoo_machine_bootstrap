@@ -1,0 +1,21 @@
+{
+  "run_list": [
+    "gentoo_machine_bootstrap"
+  ],
+  "arch": "x86_64",
+  "testing": true,
+  "testing_on_travis": true,
+  "system_disk": {
+    "usb": false,
+    "device_by_id": "/dev/sda"
+  },
+  "hostname": "travis",
+  "hardware": [
+  ],
+  "network_devices": [
+    "eth0"
+  ],
+  "automatic": {
+    "ipaddress": "127.0.0.1"
+  }
+}

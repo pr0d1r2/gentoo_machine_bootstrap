@@ -1,14 +1,4 @@
 language: bash
 
-install:
-  - sudo apt-get update
-  - sudo apt-get install axel
-  - sudo apt-get install linux-headers-generic
-  - sudo apt-get install virtualbox virtualbox-dkms
-  - sudo dpkg-reconfigure virtualbox-dkms
-  - sudo dpkg-reconfigure virtualbox
-  - sudo apt-get --reinstall install virtualbox-dkms
-  - sudo /etc/init.d/vboxdrv setup
-
 script:
-  - bash packer-build.sh
+  - bash travis-build.sh
