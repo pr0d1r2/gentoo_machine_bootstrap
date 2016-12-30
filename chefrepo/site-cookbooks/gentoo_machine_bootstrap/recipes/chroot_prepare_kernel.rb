@@ -31,16 +31,16 @@ with_marker_file :chroot_prepare_kernel_genkernel do
     execute 'USE="cryptsetup" chroot /mnt/gentoo emerge --usepkg genkernel'
   end
 
-  execute "echo 'OLDCONFIG=\"no\"' >> /mnt/gentoo/etc/genkernel.conf"
-  execute "echo 'CLEAN=\"no\"' >> /mnt/gentoo/etc/genkernel.conf"
-  execute "echo 'MRPROPER=\"no\"' >> /mnt/gentoo/etc/genkernel.conf"
-  execute "echo 'LUKS=\"yes\"' >> /mnt/gentoo/etc/genkernel.conf"
-  execute "echo 'DISKLABEL=\"yes\"' >> /mnt/gentoo/etc/genkernel.conf"
-  execute "echo 'BOOTLOADER=\"grub2\"' >> /mnt/gentoo/etc/genkernel.conf"
-  execute "echo 'MAKEOPTS=\"-j$(nproc)\"' >> /mnt/gentoo/etc/genkernel.conf"
-  execute "echo 'ZFS=\"no\"' >> /mnt/gentoo/etc/genkernel.conf"
+  genkernel_use 'OLDCONFIG="no"'
+  genkernel_use 'CLEAN="no"'
+  genkernel_use 'MRPROPER="no"'
+  genkernel_use 'LUKS="yes"'
+  genkernel_use 'DISKLABEL="yes"'
+  genkernel_use 'BOOTLOADER="grub2"'
+  genkernel_use 'MAKEOPTS="-j$(nproc)"'
+  genkernel_use 'ZFS="no"'
 
-  execute "echo 'UDEV=\"yes\"' >> /mnt/gentoo/etc/genkernel.conf" do
+  genkernel_use 'UDEV="yes"' do
     only_if { node[:gentoo][:release] == 'systemd' }
   end
 end
