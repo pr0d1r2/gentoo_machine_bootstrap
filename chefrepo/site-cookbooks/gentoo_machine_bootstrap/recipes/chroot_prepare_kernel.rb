@@ -38,6 +38,7 @@ with_marker_file :chroot_prepare_kernel_genkernel do
   execute "echo 'DISKLABEL=\"yes\"' >> /mnt/gentoo/etc/genkernel.conf"
   execute "echo 'BOOTLOADER=\"grub2\"' >> /mnt/gentoo/etc/genkernel.conf"
   execute "echo 'MAKEOPTS=\"-j$(nproc)\"' >> /mnt/gentoo/etc/genkernel.conf"
+  execute "echo 'ZFS=\"no\"' >> /mnt/gentoo/etc/genkernel.conf"
 
   execute "echo 'UDEV=\"yes\"' >> /mnt/gentoo/etc/genkernel.conf" do
     only_if { node[:gentoo][:release] == 'systemd' }
