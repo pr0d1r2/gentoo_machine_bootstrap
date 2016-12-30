@@ -5,7 +5,9 @@ export PATH="$D_R:$PATH"
 
 source $D_R/functions.sh || exit $?
 
-setup_local_ssh_key default || exit $?
-cp ~/.ssh/id_rsa_default.pub ~/.ssh/authorized_keys || exit $?
+THE_HOSTNAME="127.0.0.1"
 
-bash ./setup_ubuntu.sh 127.0.0.1 || exit $?
+setup_local_ssh_key $THE_HOSTNAME || exit $?
+cp ~/.ssh/id_rsa_$THE_HOSTNAME.pub ~/.ssh/authorized_keys || exit $?
+
+bash ./setup_ubuntu.sh $THE_HOSTNAME || exit $?
