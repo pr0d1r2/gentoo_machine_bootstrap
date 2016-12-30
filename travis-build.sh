@@ -8,4 +8,4 @@ source $D_R/functions.sh || exit $?
 setup_local_ssh_key default || exit $?
 cp ~/.ssh/id_rsa_default.pub ~/.ssh/authorized_keys || exit $?
 
-sh ./setup_ubuntu.sh 127.0.0.1 || exit $?
+bash ./setup_ubuntu.sh 127.0.0.1 || exit $?
