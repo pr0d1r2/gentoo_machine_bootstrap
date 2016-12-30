@@ -19,7 +19,7 @@ end
 include_recipe 'gentoo_machine_bootstrap::download_gentoo'
 include_recipe 'gentoo_machine_bootstrap::uncompress_gentoo'
 
-include_recipe 'gentoo_machine_bootstrap::mount_pseudo_filesystems' unless node[:testing_on_travis]
+include_recipe 'gentoo_machine_bootstrap::mount_pseudo_filesystems'
 
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_resolv_conf'
 include_recipe 'gentoo_machine_bootstrap::chroot_set_locale'
