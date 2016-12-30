@@ -1,6 +1,6 @@
 #!/bin/bash
 
-D_R=`cd \`dirname $1\` ; pwd -P`
+D_R=`cd \`dirname $0\` ; pwd -P`
 HOSTNAME=$1
 
 case $HOSTNAME in
