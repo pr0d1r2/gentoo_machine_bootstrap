@@ -1,4 +1,7 @@
 language: bash
 
+rvm:
+  - 2.3.2
+
 script:
   - bash travis-build.sh
