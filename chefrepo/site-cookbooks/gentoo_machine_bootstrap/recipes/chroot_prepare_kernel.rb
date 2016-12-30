@@ -86,5 +86,11 @@ with_marker_file :chroot_prepare_kernel_config do
 end
 
 with_marker_file :chroot_prepare_kernel_build do
-  execute 'chroot /mnt/gentoo genkernel all'
+  if node[:testing_on_travis]
+    execute 'chroot /mnt/gentoo genkernel all --loglevel=5' do
+      live_stream true
+    end
+  else
+    execute 'chroot /mnt/gentoo genkernel all'
+  end
 end
