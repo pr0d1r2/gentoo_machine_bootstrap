@@ -24,8 +24,10 @@ function bundler_threads() {
 }
 
 function ssh_keygen_old_ssh() {
-  echo ssh-keygen
-  ssh-keygen -b 4096 -f $HOME/.ssh/id_rsa_$1 -C $1@`hostname` -a 500 -N '' || return $?
+  if [ ! -f $HOME/.ssh/id_rsa_$1 ]; then
+    echo ssh-keygen
+    ssh-keygen -b 4096 -f $HOME/.ssh/id_rsa_$1 -C $1@`hostname` -a 500 -N '' || return $?
+  fi
 }
 
 function setup_local_ssh_key() {
