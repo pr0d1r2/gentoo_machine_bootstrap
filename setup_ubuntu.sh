@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 D_R=`cd \`dirname $1\` ; pwd -P`
 HOSTNAME=$1
