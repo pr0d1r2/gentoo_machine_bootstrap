@@ -15,4 +15,4 @@ echorun cp ~/.ssh/id_rsa_default.pub ~/.ssh/id_rsa_$THE_HOSTNAME.pub || exit $?
 
 ssh-keyscan $THE_HOSTNAME >> ~/.ssh/known_hosts || exit $?
 
-echorun bash ./setup_ubuntu.sh $THE_HOSTNAME || exit $?
+echorun bash ./setup_ubuntu.sh $THE_HOSTNAME `whoami` || exit $?
