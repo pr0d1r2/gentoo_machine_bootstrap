@@ -44,7 +44,9 @@ function setup_local_ssh_key() {
         ssh_keygen_old_ssh default || exit $?
       else
         echo ssh-keygen
-        ssh-keygen -b 4096 -f $HOME/.ssh/id_rsa_$1 -C $1@`hostname` -o -a 500 -N '' || return $?
+        # TODO: knife-solo needs to first support `net-ssh` 4+ (for `-o` new format key)
+        # ssh-keygen -b 4096 -f $HOME/.ssh/id_rsa_$1 -C $1@`hostname` -o -a 500 -N '' || return $?
+        ssh_keygen_old_ssh $1 || return $?
       fi
     else
       echo "There is no openssh!"
