@@ -39,6 +39,7 @@ with_marker_file :chroot_prepare_kernel_genkernel do
   genkernel_use 'BOOTLOADER="grub2"'
   genkernel_use 'MAKEOPTS="-j' + `nproc`.strip + '"'
   genkernel_use 'ZFS="no"'
+  genkernel_use 'BTRFS="no"'
 
   genkernel_use 'UDEV="yes"' do
     only_if { node[:gentoo][:release] == 'systemd' }
