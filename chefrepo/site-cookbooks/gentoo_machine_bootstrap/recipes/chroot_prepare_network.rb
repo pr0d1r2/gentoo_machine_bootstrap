@@ -7,9 +7,9 @@ with_marker_file :chroot_prepare_network do
     execute "chroot /mnt/gentoo/ rc-update add net.#{network_device} default" do
       not_if { node[:gentoo][:release] == 'systemd' }
     end
-
-    execute "echo 'hostname=\"#{node[:hostname]}\"' > /mnt/gentoo/etc/conf.d/hostname" do
-      not_if { node[:gentoo][:release] == 'systemd' }
-    end
   end
+end
+
+execute "echo 'hostname=\"#{node[:hostname]}\"' > /mnt/gentoo/etc/conf.d/hostname" do
+  not_if { node[:gentoo][:release] == 'systemd' }
 end
