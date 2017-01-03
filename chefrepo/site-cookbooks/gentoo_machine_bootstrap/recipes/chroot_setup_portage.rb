@@ -1,3 +1,1 @@
-execute "echo 'MAKEOPTS=\"-j$(nproc)\"' >> /mnt/gentoo/etc/portage/make.conf" do
-  not_if { File.open('/mnt/gentoo/etc/portage/make.conf').include?('MAKEOPTS="-j$(nproc)"') }
-end
+make_conf_use 'MAKEOPTS="-j' + `nproc`.strip + '"'
