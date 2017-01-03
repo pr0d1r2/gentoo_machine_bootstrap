@@ -1,4 +1,4 @@
-package 'layman' do
+execute 'chroot /mnt/gentoo emerge layman' do
   not_if { system('chroot /mnt/gentoo which layman') }
 end
 
