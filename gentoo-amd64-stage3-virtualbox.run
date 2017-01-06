@@ -1,0 +1,18 @@
+#!/bin/bash
+
+D_R=`cd \`dirname $0\` ; pwd -P`
+
+source $D_R/functions.sh || exit $?
+
+ensure_command vagrant || exit $?
+
+if [ ! -f $D_R/gentoo-amd64-stage3-virtualbox.box ]; then
+  bash packer-build.sh || exit $?
+fi
+
+vagrant box list | grep -q "^gentoo-amd64-stage3 "
+if [ $? -gt 0 ]; then
+  vagrant box add $D_R/gentoo-amd64-stage3-virtualbox.box --name gentoo-amd64-stage3 || exit $?
+fi
+
+vagrant up || exit $?
