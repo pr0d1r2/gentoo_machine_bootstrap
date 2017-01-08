@@ -44,6 +44,12 @@ cd chefrepo || return $?
 berks install || return $?
 cd - || return $?
 
+if [ ! -d $D_R/packer_cache/packages ]; then
+  if [ -e $D_R/packer_cache/packages ]; then
+    rm -f $D_R/packer_cache/packages || exit $?
+  fi
+fi
+
 echorun packer build $D_R/packer-virtualbox.json || exit $?
 
 echorun vagrant box remove gentoo-amd64-stage3 || exit $?
