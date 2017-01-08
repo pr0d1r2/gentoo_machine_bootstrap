@@ -21,6 +21,8 @@ include_recipe 'gentoo_machine_bootstrap::uncompress_gentoo'
 
 include_recipe 'gentoo_machine_bootstrap::mount_pseudo_filesystems'
 
+include_recipe 'gentoo_machine_bootstrap::set_testing_root_password' if node[:testing]
+
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_resolv_conf'
 include_recipe 'gentoo_machine_bootstrap::chroot_set_locale'
 include_recipe 'gentoo_machine_bootstrap::chroot_sync_portage'
