@@ -4,7 +4,7 @@ end
 
 with_marker_file :chroot_prepare_kernel_genkernel do
   if node[:gentoo][:release] == 'systemd'
-    execute 'USE="cryptsetup" chroot /mnt/gentoo emerge genkernel-next'
+    execute 'USE="cryptsetup" chroot /mnt/gentoo emerge --usepkg genkernel-next'
   else
     execute 'USE="cryptsetup" chroot /mnt/gentoo emerge --usepkg genkernel'
   end
