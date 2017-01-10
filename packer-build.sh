@@ -65,8 +65,11 @@ done
 cat $BINARY_PACKAGES_RECIPE | sort > $BINARY_PACKAGES_RECIPE.tmp || exit $?
 mv $BINARY_PACKAGES_RECIPE.tmp $BINARY_PACKAGES_RECIPE || exit $?
 
-vagrant box list | grep -q "^gentoo-amd64-stage3 "
+which vagrant &>/dev/null
 if [ $? -eq 0 ]; then
-  echorun vagrant box remove gentoo-amd64-stage3 || exit $?
-  echorun vagrant box add $D_R/gentoo-amd64-stage3-virtualbox.box --name gentoo-amd64-stage3 || exit $?
+  vagrant box list | grep -q "^gentoo-amd64-stage3 "
+  if [ $? -eq 0 ]; then
+    echorun vagrant box remove gentoo-amd64-stage3 || exit $?
+    echorun vagrant box add $D_R/gentoo-amd64-stage3-virtualbox.box --name gentoo-amd64-stage3 || exit $?
+  fi
 fi
