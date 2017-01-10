@@ -9,6 +9,9 @@
     "usb": false,
     "device_by_id": "/dev/sda"
   },
+  "gentoo": {
+    "binary_packages_cache": "https://raw.githubusercontent.com/pr0d1r2/gentoo_machine_bootstrap_assets/master/packages"
+  },
   "hostname": "travis",
   "hardware": [
   ],
