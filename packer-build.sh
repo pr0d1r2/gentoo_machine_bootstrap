@@ -52,6 +52,19 @@ fi
 
 echorun packer build $D_R/packer-virtualbox.json || exit $?
 
+BINARY_PACKAGES_RECIPE="$D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/recipes/chroot_prepare_binary_packages.rb"
+for PACKAGE_FILE in `find $D_R/packer_cache/packages -type f`
+do
+  PACKAGE_FILE=`echo $PACKAGE_FILE | sed -e "s|$D_R/packer_cache/packages/||"`
+  PACKAGE_DEFINITION="gentoo_binary_package '$PACKAGE_FILE'"
+  cat $BINARY_PACKAGES_RECIPE | grep -q "$PACKAGE_DEFINITION"
+  if [ $? -gt 0 ]; then
+    echo "$PACKAGE_DEFINITION" >> $BINARY_PACKAGES_RECIPE || exit $?
+  fi
+done
+cat $BINARY_PACKAGES_RECIPE | sort > $BINARY_PACKAGES_RECIPE.tmp || exit $?
+mv $BINARY_PACKAGES_RECIPE.tmp $BINARY_PACKAGES_RECIPE || exit $?
+
 vagrant box list | grep -q "^gentoo-amd64-stage3 "
 if [ $? -gt 0 ]; then
   echorun vagrant box remove gentoo-amd64-stage3 || exit $?

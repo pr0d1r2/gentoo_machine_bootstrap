@@ -27,6 +27,8 @@ end
 default[:gentoo] = {
   release: 'vanilla',
   hardened: false,
+  binary_packages_cache: '',
+  portage_binhost: '',
   chefdk: true,
   stage: 3,
   genkernel: true,

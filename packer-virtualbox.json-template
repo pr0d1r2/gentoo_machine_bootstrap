@@ -65,6 +65,7 @@
           "device_by_id": "/dev/sda"
         },
         "gentoo": {
+          "binary_packages_cache": "PACKER_CACHE_URL/packages",
           "mirror": {
             "path": "PACKER_CACHE_URL",
             "subdirectories": false
