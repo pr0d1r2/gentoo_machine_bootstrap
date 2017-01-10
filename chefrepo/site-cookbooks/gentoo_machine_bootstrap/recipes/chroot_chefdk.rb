@@ -1,4 +1,4 @@
-execute 'chroot /mnt/gentoo emerge layman' do
+execute 'chroot /mnt/gentoo emerge --usepkg layman' do
   not_if { system('chroot /mnt/gentoo which layman') }
 end
 
@@ -27,6 +27,6 @@ end
 
 execute 'echo "app-admin/chefdk-omnibus ~amd64" > /mnt/gentoo/etc/portage/package.keywords/chefdk-omnibus'
 
-execute 'chroot /mnt/gentoo emerge chefdk-omnibus' do
+execute 'chroot /mnt/gentoo emerge --usepkg chefdk-omnibus' do
   not_if { system('chroot /mnt/gentoo which chef-solo') }
 end
