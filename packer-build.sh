@@ -53,7 +53,7 @@ fi
 echorun packer build $D_R/packer-virtualbox.json || exit $?
 
 BINARY_PACKAGES_RECIPE="$D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/recipes/chroot_prepare_binary_packages.rb"
-for PACKAGE_FILE in `find $D_R/packer_cache/packages -type f`
+for PACKAGE_FILE in `find $D_R/packer_cache/packages -type f | grep -v sys-kernel/gentoo-sources`
 do
   PACKAGE_FILE=`echo $PACKAGE_FILE | sed -e "s|$D_R/packer_cache/packages/||"`
   PACKAGE_DEFINITION="gentoo_binary_package '$PACKAGE_FILE'"
