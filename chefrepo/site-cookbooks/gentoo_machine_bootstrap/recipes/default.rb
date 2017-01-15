@@ -28,6 +28,8 @@ include_recipe 'gentoo_machine_bootstrap::chroot_set_locale'
 include_recipe 'gentoo_machine_bootstrap::chroot_sync_portage'
 include_recipe 'gentoo_machine_bootstrap::chroot_setup_portage'
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_binary_packages' unless node[:gentoo][:binary_packages_cache] == ''
+include_recipe 'gentoo_machine_bootstrap::chroot_chefdk' if node[:gentoo][:chefdk]
+
 include_recipe 'gentoo_machine_bootstrap::chroot_install_lvm2'
 include_recipe 'gentoo_machine_bootstrap::chroot_install_grub'
 include_recipe 'gentoo_machine_bootstrap::chroot_systemd' if node[:gentoo][:release] == 'systemd'
@@ -39,7 +41,6 @@ include_recipe 'gentoo_machine_bootstrap::chroot_prepare_kernel' if node[:gentoo
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_network'
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_sshd'
 
-include_recipe 'gentoo_machine_bootstrap::chroot_chefdk' if node[:gentoo][:chefdk]
 
 include_recipe 'gentoo_machine_bootstrap::remind_to_set_root_fs_luks_key' unless node[:testing]
 include_recipe 'gentoo_machine_bootstrap::remind_to_set_root_password' unless node[:testing]
