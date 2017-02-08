@@ -66,6 +66,21 @@ function sha256hash() {
   shasum -a 256 $1 | cut -f 1 -d ' '
 }
 
+function sha512hash() {
+  shasum -a 512 $1 | cut -f 1 -d ' '
+}
+
+function md5hash() {
+  case `uname` in
+    Darwin)
+      echo $(md5 $1 | cut -f 2 -d =)
+      ;;
+    *)
+      md5sum $1 | cut -f 1 -d ' '
+      ;;
+  esac
+}
+
 function confirm_checksum() {
   local confirm_checksum_SUM=`sha256hash $1`
   case $confirm_checksum_SUM in
@@ -73,6 +88,10 @@ function confirm_checksum() {
       ;;
     *)
       echo "Bad checksum for $1 (REMOVING) [expected: $2, was $confirm_checksum_SUM]"
+      echo
+      echo "Calculated other sums (you may use them to check with DIGESTS file in case you are updating):"
+      echo "SHA512: `sha512hash $1`"
+      echo "MD5: `md5hash $1`"
       rm -f $1
       return 101
       ;;
