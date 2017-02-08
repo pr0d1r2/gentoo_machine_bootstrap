@@ -21,6 +21,7 @@ function cache_gentoo_and_portage() {
 }
 
 echorun git submodule update --init || exit $?
+echorun git submodule update --recursive --remote --force || exit $?
 
 echorun ensure_command axel || exit $?
 echorun ensure_command packer || exit $?
