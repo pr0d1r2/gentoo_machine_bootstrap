@@ -20,6 +20,8 @@ function cache_gentoo_and_portage() {
     $PORTAGE_CHECKSUM || return $?
 }
 
+echorun git submodule update --init || exit $?
+
 echorun ensure_command axel || exit $?
 echorun ensure_command packer || exit $?
 echorun ensure_command VBoxManage Caskroom/cask/virtualbox Caskroom/cask/virtualbox-extension-pack || exit $?
