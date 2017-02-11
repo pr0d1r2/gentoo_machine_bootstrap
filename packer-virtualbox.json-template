@@ -51,7 +51,7 @@
     },
     {
       "type": "shell",
-      "inline": ["sudo apt-get install -y curl parted cryptsetup"]
+      "inline": ["sudo apt-get install -y curl parted cryptsetup git"]
     },
     {
       "type": "chef-solo",

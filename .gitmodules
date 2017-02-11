@@ -1,3 +1,6 @@
 [submodule "packer_cache"]
 	path = packer_cache
 	url = https://github.com/pr0d1r2/gentoo_machine_bootstrap_assets.git
+[submodule "gentoo_converge-nodes"]
+	path = gentoo_converge-nodes
+	url = git@gitlab.com:pr0d1r2/gentoo_converge-nodes.git
