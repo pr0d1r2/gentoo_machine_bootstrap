@@ -8,7 +8,7 @@ execute 'chroot /mnt/gentoo layman -s ALL' do
   not_if { File.directory?(ssnb_path) }
 end
 
-execute 'chroot /mnt/gentoo layman -a ssnb' do
+execute 'echo y | chroot /mnt/gentoo layman -a ssnb' do
   not_if { File.directory?(ssnb_path) }
 end
 
