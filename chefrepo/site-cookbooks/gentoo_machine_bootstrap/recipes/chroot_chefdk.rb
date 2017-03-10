@@ -13,14 +13,6 @@ execute 'echo y | chroot /mnt/gentoo layman -a ssnb' do
 end
 
 
-layman_snippet = 'source /var/lib/layman/make.conf'
-make_conf = '/mnt/gentoo/etc/portage/make.conf'
-
-execute "echo '#{layman_snippet}' >> #{make_conf}" do
-  not_if { File.read(make_conf).include?(layman_snippet) }
-end
-
-
 directory '/mnt/gentoo/etc/portage/package.keywords' do
   recursive true
 end
