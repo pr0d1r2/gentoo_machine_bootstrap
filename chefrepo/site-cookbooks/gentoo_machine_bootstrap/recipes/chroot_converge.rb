@@ -3,4 +3,4 @@ git '/mnt/gentoo/root/gentoo_converge' do
   enable_submodules false # not need as we do not need extra private configuration
 end
 
-execute 'chroot /mnt/gentoo bash /root/gentoo_converge/setup-on-gentoo.sh'
+execute 'HOME=/root chroot /mnt/gentoo bash /root/gentoo_converge/setup-on-gentoo.sh'
