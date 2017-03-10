@@ -7,6 +7,7 @@ before_install:
     - grep -v gentoo_converge-nodes .gitmodules > .gitmodules.tmp
     - mv .gitmodules.tmp .gitmodules
     - git submodule update --init --recursive
+    - echo '127.0.0.1 localhost' > /etc/hosts
 
 install:
   - wget https://packages.chef.io/files/stable/chef/12.15.19/ubuntu/12.04/chef_12.15.19-1_amd64.deb
