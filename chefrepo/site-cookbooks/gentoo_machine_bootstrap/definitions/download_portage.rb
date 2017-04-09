@@ -1,6 +1,6 @@
 define :download_portage do
-  portage_version = '20170309'
-  portage_checksum = 'c6d2474dd988c6e6f58ac89554a61df3bd1df5739dabb88602b35b816e0fe66d'
+  portage_version = '20170408'
+  portage_checksum = '4d3a0f609d4c0985e2c2dff7fec1a3dc4dc5f610e5064b02a72962fee048cdaa'
 
   download_portage_root = params[:name] || raise('give destination directory as first parameter')
 
