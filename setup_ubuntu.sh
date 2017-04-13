@@ -37,4 +37,9 @@ if [ ! -f $D_R/nodes/$HOSTNAME.setup-done ]; then
   touch $D_R/nodes/$HOSTNAME.setup-done
 fi
 
+ssh $USERNAME@$HOSTNAME which git &>/dev/null
+if [ $? -gt 0 ]; then
+  echorun ssh $USERNAME@$HOSTNAME sudo apt-get install git -y || exit $?
+fi
+
 echorun knife solo cook $USERNAME@$HOSTNAME || exit $?
