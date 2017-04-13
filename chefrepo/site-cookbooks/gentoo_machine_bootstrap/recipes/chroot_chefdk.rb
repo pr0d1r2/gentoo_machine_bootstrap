@@ -1,5 +1,5 @@
 execute 'chroot /mnt/gentoo emerge --usepkg layman' do
-  not_if { system('chroot /mnt/gentoo which layman &>/dev/null') }
+  not_if { system('chroot /mnt/gentoo which layman 1>/dev/null 2>/dev/null') }
 end
 
 ssnb_path = '/mnt/gentoo/var/lib/layman/ssnb'
@@ -20,5 +20,5 @@ end
 execute 'echo "app-admin/chefdk-omnibus ~amd64" > /mnt/gentoo/etc/portage/package.keywords/chefdk-omnibus'
 
 execute 'chroot /mnt/gentoo emerge --usepkg chefdk-omnibus' do
-  not_if { system('chroot /mnt/gentoo which chef-solo &>/dev/null') }
+  not_if { system('chroot /mnt/gentoo which chef-solo 1>/dev/null 2>/dev/null') }
 end
