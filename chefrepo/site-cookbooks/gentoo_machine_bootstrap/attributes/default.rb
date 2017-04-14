@@ -50,3 +50,7 @@ if node[:automatic] && node[:automatic][:ipaddress]
 else
   default[:authorized_key_name] = 'default'
 end
+
+default[:kernel] = {
+  params: []
+}

@@ -16,6 +16,7 @@ contents = %W[
                       real_root=#{node[:system_disk][:target_partition]}
                       initrd=/dev/ram0
                       #{'nomodeset' if node[:system_disk][:usb]}
+                      #{[node[:kernel][:params]].flatten.join(' ')}
                       #{'init=/usr/lib/systemd/systemd' if node[:gentoo][:release] == 'systemd'}"
 ].join(' ').strip
 execute "echo '#{contents}' >> #{file}" do
