@@ -40,6 +40,17 @@ something like:
 }
 ```
 
+You can also use binary packages for installation. For now they are
+maintained only for `x86_64`.
+
+```
+{
+  "gentoo": {
+    "binary_packages_cache": "https://github.com/pr0d1r2/gentoo_machine_bootstrap_assets/blob/master/packages"
+  }
+}
+```
+
 Then if you boot your machine from ubuntu Live CD (I use Ubuntu 16.04
 desktop 64 net-booted from OpenWRT using [openwrt_tools](https://github.com/pr0d1r2/openwrt_tools/blob/master/setup_pxe_boot_ubuntu_16_04_desktop_64.sh)).
 

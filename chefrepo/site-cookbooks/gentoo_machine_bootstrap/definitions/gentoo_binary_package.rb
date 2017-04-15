@@ -5,6 +5,10 @@ define :gentoo_binary_package do
   downloaded_file = "/mnt/gentoo/usr/portage/packages/#{package_file}"
   source = [node[:gentoo][:binary_packages_cache], package_file].join('/')
 
+  if node[:gentoo][:binary_packages_cache][0..18] == 'https://github.com/'
+    source += '?raw=true'
+  end
+
   directory File.dirname(downloaded_file) do
     recursive true
   end
