@@ -1,5 +1,5 @@
 gentoo_binary_package 'Packages'
-gentoo_binary_package 'app-admin/chefdk-omnibus-1.2.22.tbz2'
+gentoo_binary_package 'app-admin/chefdk-omnibus-1.3.40.tbz2'
 gentoo_binary_package 'app-arch/cpio-2.12-r1.tbz2'
 gentoo_binary_package 'app-crypt/gnupg-2.1.18.tbz2'
 gentoo_binary_package 'app-crypt/pinentry-0.9.7-r1.tbz2'
