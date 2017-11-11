@@ -98,7 +98,7 @@ GEM
       erubis (~> 2.7.0)
       net-ssh (>= 2.7, < 4.0)
     libyajl2 (1.2.0)
-    minitar (0.5.4)
+    minitar (0.6.1)
     mixlib-archive (0.2.0)
       mixlib-log
     mixlib-authentication (1.4.1)
@@ -219,4 +219,4 @@ DEPENDENCIES
   rake
 
 BUNDLED WITH
-   1.13.6
+   1.13.7
