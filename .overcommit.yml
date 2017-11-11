@@ -1,0 +1,11 @@
+PreCommit:
+  ShellCheck:
+    enabled: true
+    on_warn: fail
+  EnsureNoSortPipeUniq:
+    enabled: true
+    include:
+      - '**/*.sh'
+  BundleAudit:
+    enabled: true
+    on_warn: fail
