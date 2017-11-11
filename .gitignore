@@ -4,3 +4,4 @@ nodes/*
 chefrepo/site-cookbooks/gentoo_machine_bootstrap/files
 packer-virtualbox.json
 .vagrant/
+gentoo-amd64-stage3-virtualbox.box
