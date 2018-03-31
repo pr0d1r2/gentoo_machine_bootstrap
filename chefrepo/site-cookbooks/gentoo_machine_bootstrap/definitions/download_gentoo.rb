@@ -5,6 +5,7 @@ define :download_gentoo do
   download_gentoo_release = params[:release] || raise('release is required')
   download_gentoo_hardened = params[:hardened]
   download_gentoo_stage = params[:stage]
+  gentoo_compression_suffix = 'bz2'
   raise('hardened is required') if download_gentoo_hardened.nil?
 
   gentoo_subdir = ''
@@ -15,9 +16,10 @@ define :download_gentoo do
     when 'vanilla'
       case download_gentoo_stage
       when 3
-        gentoo_version = '20170525'
-        gentoo_checksum = 'a1051a302ab9c1abe342a3ce303267cc1dcbe940730412690ea92b90f902f7d2'
-        gentoo_basename = "stage3-amd64-#{gentoo_version}.tar.bz2"
+        gentoo_version = '20180325T214502Z'
+        gentoo_checksum = 'da703d631d34351b8ae4100cbb511360ff5282a72959e084bd7b7fa7691c35b0'
+        gentoo_compression_suffix = 'xz'
+        gentoo_basename = "stage3-amd64-#{gentoo_version}.tar.#{gentoo_compression_suffix}"
         if node[:gentoo][:mirror][:subdirectories]
           gentoo_subdir = 'ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage3-amd64'
         end
@@ -29,7 +31,7 @@ define :download_gentoo do
       when 3
         gentoo_version = '20161118'
         gentoo_checksum = '8dd7d510309633960571d07556e35d6236bf91b03d37b670afdd093cdb05f5c5'
-        gentoo_basename = "stage3-amd64-systemd-#{gentoo_version}.tar.bz2"
+        gentoo_basename = "stage3-amd64-systemd-#{gentoo_version}.tar.#{gentoo_compression_suffix}"
         if node[:gentoo][:mirror][:subdirectories]
           gentoo_subdir = '/ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage3-amd64-systemd'
         end
@@ -42,13 +44,13 @@ define :download_gentoo do
         gentoo_version = '20161117'
         if download_gentoo_hardened
           gentoo_checksum = '560f468051ecec0452d58d0ae0c8aa5c18991b80510e7cad5fed27a3c9f4e015'
-          gentoo_basename = "stage4-amd64-hardened+cloud-#{gentoo_version}.tar.bz2"
+          gentoo_basename = "stage4-amd64-hardened+cloud-#{gentoo_version}.tar.#{gentoo_compression_suffix}"
           if node[:gentoo][:mirror][:subdirectories]
             gentoo_subdir = '/ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage4-amd64-hardened+cloud'
           end
         else
           gentoo_checksum = 'a7be39029c8da7b7e82d3745affd0b3e6c63c8bf9b4a2f465045571d79b75244'
-          gentoo_basename = "stage4-amd64-cloud-#{gentoo_version}.tar.bz2"
+          gentoo_basename = "stage4-amd64-cloud-#{gentoo_version}.tar.#{gentoo_compression_suffix}"
           if node[:gentoo][:mirror][:subdirectories]
             gentoo_subdir = '/ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage4-amd64-cloud'
           end
@@ -72,7 +74,7 @@ define :download_gentoo do
     checksum gentoo_checksum
   end
 
-  link "#{download_gentoo_root}/stage-latest.tar.bz2" do
+  link "#{download_gentoo_root}/stage-latest.tar.#{gentoo_compression_suffix}" do
     to downloaded_file
   end
 end

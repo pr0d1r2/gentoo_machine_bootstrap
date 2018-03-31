@@ -16,7 +16,7 @@ function cache_gentoo_and_portage() {
   PORTAGE_CHECKSUM=$(grep "portage_checksum = '" "$DOWNLOAD_PORTAGE_FILE" | cut -f 2 -d "'")
 
   download_with_checksum \
-    "http://mirror.switch.ch/ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-$GENTOO_VERSION.tar.bz2" \
+    "http://mirror.switch.ch/ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-$GENTOO_VERSION.tar.xz" \
     "$GENTOO_CHECKSUM" || return $?
 
   download_with_checksum \
