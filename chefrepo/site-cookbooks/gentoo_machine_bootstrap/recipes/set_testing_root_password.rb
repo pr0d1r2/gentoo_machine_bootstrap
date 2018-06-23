@@ -1,1 +1,1 @@
-execute 'echo "Testt35t\nTestt35t" | chroot /mnt/gentoo passwd root'
+execute 'yes "Testt35t" | chroot /mnt/gentoo passwd root'
