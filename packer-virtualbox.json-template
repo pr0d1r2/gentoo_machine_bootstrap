@@ -11,30 +11,44 @@
       "boot_wait": "3s",
       "boot_command": [
         "<enter>",
-        "<wait10><wait10>",
-        "user",
-        "<enter>",
-        "live",
-        "<enter>",
-        "sudo bash",
+        "<wait10><wait10><wait5>",
+        "root",
         "<enter>",
         "echo 'http://{{ .HTTPIP }}:{{ .HTTPPort }}' > /packer_cache.url",
         "<enter>",
-        "sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config",
+        "echo 'auto lo' > /etc/network/interfaces",
         "<enter>",
-        "/etc/init.d/ssh restart",
+        "echo 'iface lo inet loopback' >> /etc/network/interfaces",
         "<enter>",
-        "<wait5>"
+        "echo 'auto eth0' >> /etc/network/interfaces",
+        "<enter>",
+        "echo 'iface eth0 inet dhcp' >> /etc/network/interfaces",
+        "<enter>",
+        "/etc/init.d/networking start",
+        "<enter>",
+        "apk add openssh",
+        "<enter>",
+        "echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config",
+        "<enter>",
+        "passwd",
+        "<enter>",
+        "root",
+        "<enter>",
+        "root",
+        "<enter>",
+        "/etc/init.d/sshd start",
+        "<enter>",
+        "<wait>"
       ],
       "hard_drive_interface": "sata",
       "type": "virtualbox-iso",
-      "guest_os_type": "Debian_64",
-      "iso_url": "http://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-8.7.1-amd64-standard.iso",
-      "iso_checksum": "85b8394bc93dd7a34de674a1e15405fde8e44b035be18eb8b31f9867f699edd71a00e790aec3941fd7ee7a2d6be6d030d97e43c0c723c55e27c328116fff48bd",
+      "guest_os_type": "Linux_64",
+      "iso_url": "http://dl-cdn.alpinelinux.org/alpine/v3.7/releases/x86_64/alpine-standard-3.7.0-x86_64.iso",
+      "iso_checksum": "b2df4ac75e608fb70b40b24281af7589b7879b2dae01bc6b17eb8116863f85f107b9bfcd4f8f3003054ebd2944ef4499cd7a883e22f514f8a449a90a020c5c04",
       "iso_checksum_type": "sha512",
-      "ssh_username": "user",
-      "ssh_password": "live",
-      "shutdown_command": "sudo -S shutdown -P now"
+      "ssh_username": "root",
+      "ssh_password": "root",
+      "shutdown_command": "shutdown -P now"
     }
   ],
   "description": "Faithful Stage 3 Gentoo Installation (VirtualBox)",
@@ -47,14 +61,38 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": ["sudo apt-get update"]
+      "inline": [
+        "setup-apkrepos",
+        "apk update",
+        "apk upgrade"
+      ]
     },
     {
       "type": "shell",
-      "inline": ["sudo apt-get install -y curl parted cryptsetup git"]
+      "inline": ["echo '7' > /etc/debian_version"]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "mkdir /mnt/ramdisk",
+        "mount -t tmpfs tmpfs /mnt/ramdisk"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "apk add curl parted cryptsetup git bash ruby ruby-dev ruby-json build-base perl libffi-dev ca-certificates e2fsprogs xz",
+        "gem install --no-ri --no-rdoc mixlib-shellout chef berkshelf knife-supermarket io-console",
+        "apk del libffi-dev perl build-base",
+        "rm -rf /var/cache/apk/*",
+        "modprobe ext4"
+      ]
     },
     {
       "type": "chef-solo",
+      "prevent_sudo": true,
+      "skip_install": true,
+      "staging_directory": "/mnt/ramdisk",
       "cookbook_paths": [
         "chefrepo/site-cookbooks"
       ],
@@ -76,7 +114,7 @@
           }
         }
       },
-      "execute_command": "sed -i \"s|PACKER_CACHE_URL|`cat /packer_cache.url`|g\" {{.JsonPath}} && {{if .Sudo}}sudo {{end}}chef-solo --no-color -c {{.ConfigPath}} -j {{.JsonPath}}"
+      "execute_command": "sed -i \"s|PACKER_CACHE_URL|`cat /packer_cache.url`|g\" {{.JsonPath}} && chef-solo --no-color -c {{.ConfigPath}} -j {{.JsonPath}}"
     },
     {
       "type": "file",
@@ -86,7 +124,7 @@
     },
     {
       "type": "shell",
-      "inline": ["{{if .Sudo}}sudo {{end}}rm -rf /mnt/gentoo/portage/distfiles"]
+      "inline": ["rm -rf /mnt/gentoo/portage/distfiles"]
     }
   ]
 }
