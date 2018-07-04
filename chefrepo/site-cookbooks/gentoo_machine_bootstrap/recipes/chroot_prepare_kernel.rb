@@ -6,6 +6,12 @@ with_marker_file :chroot_prepare_kernel_genkernel do
   if node[:gentoo][:release] == 'systemd'
     execute 'USE="cryptsetup" chroot /mnt/gentoo emerge --usepkg genkernel-next'
   else
+    directory '/mnt/gentoo/etc/portage/package.use' do
+      recursive true
+    end
+
+    execute 'echo "sys-apps/util-linux static-libs" > /mnt/gentoo/etc/portage/package.use/util-linux'
+
     execute 'USE="cryptsetup" chroot /mnt/gentoo emerge --usepkg genkernel'
   end
 
