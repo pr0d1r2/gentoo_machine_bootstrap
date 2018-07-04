@@ -25,7 +25,7 @@ function ssh_keygen_old_ssh() {
 
 function setup_local_ssh_key() {
   if [ ! -f "$HOME/.ssh/id_rsa_$1" ]; then
-    if ! (ssh -V 2>&1 | grep -q "^OpenSSH"); then
+    if (ssh -V 2>&1 | grep -q "^OpenSSH"); then
       local setup_local_ssh_key_SSH_VERSION_MAJOR
       setup_local_ssh_key_SSH_VERSION_MAJOR=$(ssh -V 2>&1 | cut -f 1 -d , | cut -f 2 -d _ | cut -f 1 -d .)
       local setup_local_ssh_key_SSH_VERSION_MINOR
