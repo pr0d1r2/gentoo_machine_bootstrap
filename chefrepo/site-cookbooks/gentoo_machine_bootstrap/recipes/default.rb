@@ -27,6 +27,7 @@ include_recipe 'gentoo_machine_bootstrap::chroot_prepare_resolv_conf'
 include_recipe 'gentoo_machine_bootstrap::chroot_set_locale'
 include_recipe 'gentoo_machine_bootstrap::chroot_sync_portage'
 include_recipe 'gentoo_machine_bootstrap::chroot_setup_portage'
+include_recipe 'gentoo_machine_bootstrap::chroot_setup_ccache'
 include_recipe 'gentoo_machine_bootstrap::chroot_prepare_binary_packages' unless node[:gentoo][:binary_packages_cache] == ''
 include_recipe 'gentoo_machine_bootstrap::chroot_chefdk' if node[:gentoo][:chefdk]
 include_recipe 'gentoo_machine_bootstrap::chroot_converge'

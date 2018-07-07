@@ -54,3 +54,6 @@ end
 default[:kernel] = {
   params: []
 }
+
+default[:ccache] = {} unless node[:ccache]
+default[:ccache][:size] = '10G' unless node[:ccache][:size]
