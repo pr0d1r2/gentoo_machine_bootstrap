@@ -7,13 +7,14 @@
         ["modifyvm", "{{.Name}}", "--cpus", "CPU_NUM"]
       ],
       "headless": true,
-      "http_directory": "packer_cache",
+      "http_directory": "PACKER_CACHE_DIR",
       "boot_wait": "3s",
       "boot_command": [
         "<enter>",
         "<wait10><wait10><wait5>",
         "root",
         "<enter>",
+        "<wait>",
         "echo 'http://{{ .HTTPIP }}:{{ .HTTPPort }}' > /packer_cache.url",
         "<enter>",
         "echo 'auto lo' > /etc/network/interfaces",
@@ -32,8 +33,10 @@
         "<enter>",
         "passwd",
         "<enter>",
+        "<wait>",
         "root",
         "<enter>",
+        "<wait>",
         "root",
         "<enter>",
         "/etc/init.d/sshd start",
@@ -119,7 +122,7 @@
     {
       "type": "file",
       "source": "/mnt/gentoo/usr/portage/packages/*",
-      "destination": "packer_cache/packages/",
+      "destination": "PACKER_CACHE_DIR/packages/",
       "direction": "download"
     },
     {

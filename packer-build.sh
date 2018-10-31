@@ -34,10 +34,16 @@ echorun ensure_command VBoxManage Caskroom/cask/virtualbox Caskroom/cask/virtual
 CPU_NUM=$(nproc) || exit $?
 MEMORY=$((CPU_NUM * 512)) # MB
 
+if [ -z "$PACKER_CACHE_DIR" ]; then
+  PACKER_CACHE_DIR="$HOME/tmp/packer_cache"
+fi
+export PACKER_CACHE_DIR
+
 # shellcheck disable=SC2002
 cat "$D_R/packer-virtualbox.json-template" | \
   sed -e "s/CPU_NUM/$CPU_NUM/g" | \
-  sed -e "s/MEMORY/$MEMORY/g" > "$D_R/packer-virtualbox.json"
+  sed -e "s/MEMORY/$MEMORY/g" | \
+  sed -e "s|PACKER_CACHE_DIR|$PACKER_CACHE_DIR|g" > "$D_R/packer-virtualbox.json"
 
 setup_local_ssh_key default || exit $?
 
@@ -48,19 +54,19 @@ cd chefrepo || return $?
 berks install || return $?
 cd - || return $?
 
-if [ ! -d "$D_R/packer_cache/packages" ]; then
-  if [ -e "$D_R/packer_cache/packages" ]; then
-    rm -f "$D_R/packer_cache/packages" || exit $?
+if [ ! -d "$PACKER_CACHE_DIR/packages" ]; then
+  if [ -e "$PACKER_CACHE_DIR/packages" ]; then
+    rm -f "$PACKER_CACHE_DIR/packages" || exit $?
   fi
 fi
 
 echorun packer build "$D_R/packer-virtualbox.json" || exit $?
 
 BINARY_PACKAGES_RECIPE="$D_R/chefrepo/site-cookbooks/gentoo_machine_bootstrap/recipes/chroot_prepare_binary_packages.rb"
-for PACKAGE_FILE in $(find "$D_R/packer_cache/packages" -type f | grep -v sys-kernel/gentoo-sources)
+for PACKAGE_FILE in $(find "$PACKER_CACHE_DIR/packages" -type f | grep -v sys-kernel/gentoo-sources)
 do
   # shellcheck disable=SC2001
-  PACKAGE_FILE=$(echo "$PACKAGE_FILE" | sed -e "s|$D_R/packer_cache/packages/||")
+  PACKAGE_FILE=$(echo "$PACKAGE_FILE" | sed -e "s|$PACKER_CACHE_DIR/packages/||")
   PACKAGE_DEFINITION="gentoo_binary_package '$PACKAGE_FILE'"
   if ! (grep -q "$PACKAGE_DEFINITION" "BINARY_PACKAGES_RECIPE"); then
     echo "$PACKAGE_DEFINITION" >> "$BINARY_PACKAGES_RECIPE" || exit $?
@@ -69,7 +75,7 @@ done
 sort < "$BINARY_PACKAGES_RECIPE" > "$BINARY_PACKAGES_RECIPE.tmp" || exit $?
 mv "$BINARY_PACKAGES_RECIPE.tmp" "$BINARY_PACKAGES_RECIPE" || exit $?
 
-if (which vagrant &>/dev/null); then
+if (command -v vagrant &>/dev/null); then
   if (vagrant box list | grep -q "^gentoo-amd64-stage3 "); then
     echorun vagrant box remove gentoo-amd64-stage3 || exit $?
     echorun vagrant box add "$D_R/gentoo-amd64-stage3-virtualbox.box" --name gentoo-amd64-stage3 || exit $?

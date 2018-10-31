@@ -93,10 +93,10 @@ function confirm_checksum() {
 function download_with_checksum() {
   local download_with_checksum_BASENAME
   download_with_checksum_BASENAME=$(basename "$1")
-  if [ ! -d "$D_R/packer_cache" ]; then
-    mkdir -p "$D_R/packer_cache" || return $?
+  if [ ! -d "$PACKER_CACHE_DIR" ]; then
+    mkdir -p "$PACKER_CACHE_DIR" || return $?
   fi
-  cd "$D_R/packer_cache" || return $?
+  cd "$PACKER_CACHE_DIR" || return $?
   if [ ! -f "$download_with_checksum_BASENAME" ]; then
     case $3 in
       --wget)
@@ -121,7 +121,7 @@ function ensure_command() {
       local ensure_command_PACKAGE="$2 $3 $4 $5 $6 $7 $8 $9"
       ;;
   esac
-  if ! (which "$ensure_command_COMMAND" &>/dev/null); then
+  if ! (command -v "$ensure_command_COMMAND" &>/dev/null); then
     case $UNAME in
       Darwin)
         echorun brew install "$ensure_command_PACKAGE" || return $?
@@ -133,7 +133,7 @@ function ensure_command() {
               https://releases.hashicorp.com/packer/0.12.1/packer_0.12.1_linux_amd64.zip \
               456e6245ea95705191a64e0556d7a7ecb7db570745b3b4b2e1ebf92924e9ef95 \
               --wget || return 205
-            echorun unzip "$D_R/packer_cache/packer_0.12.1_linux_amd64.zip" || retutn 5006
+            echorun unzip "$PACKER_CACHE_DIR/packer_0.12.1_linux_amd64.zip" || return 206
             ;;
           *)
             echo "Please install package for command $ensure_command_COMMAND"

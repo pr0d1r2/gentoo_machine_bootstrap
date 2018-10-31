@@ -6,12 +6,13 @@
 
 cd "$(dirname "$0")" || return $?
 
+# shellcheck disable=SC1117
 parallel \
   'ssh root@{} find /usr/portage/packages/ -name "openss[lh]-*" -o -name "chefdk-omnibus-*" | sed -e "s|^|root@{}:|g" ' \
   ::: \
   "$@" | \
     parallel \
       -v \
-      'scp {} {= s:[^\:]+\:::; s/\/usr\/portage/packer_cache/; =}'
+      "scp {} {= s:[^\:]+\:::; s/\/usr\/portage/$PACKER_CACHE_DIR/; =}"
 
 exit $?
