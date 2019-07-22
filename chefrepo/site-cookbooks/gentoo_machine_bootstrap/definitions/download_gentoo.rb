@@ -16,12 +16,12 @@ define :download_gentoo do
     when 'vanilla'
       case download_gentoo_stage
       when 3
-        gentoo_version = '20180703T214502Z'
-        gentoo_checksum = 'bcaaeaceedee0d50cd803f8edc48436e2fe900ac72ccb1cbb76cfc024c92a0e7'
+        gentoo_version = '20190716T103222Z'
+        gentoo_checksum = '8c8595b425bc12d44f8ce494deb713c9159b9b80ad13ed8cdb6543b28fc477bb'
         gentoo_compression_suffix = 'xz'
         gentoo_basename = "stage3-amd64-#{gentoo_version}.tar.#{gentoo_compression_suffix}"
         if node[:gentoo][:mirror][:subdirectories]
-          gentoo_subdir = 'ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage3-amd64'
+          gentoo_subdir = 'download/gentoo-mirror/releases/amd64/autobuilds/current-stage3-amd64'
         end
       else
         raise "Unknown stage: #{download_gentoo_stage} (for release #{download_gentoo_release})"
@@ -29,11 +29,11 @@ define :download_gentoo do
     when 'systemd'
       case download_gentoo_stage
       when 3
-        gentoo_version = '20161118'
+        gentoo_version = '20190713'
         gentoo_checksum = '8dd7d510309633960571d07556e35d6236bf91b03d37b670afdd093cdb05f5c5'
         gentoo_basename = "stage3-amd64-systemd-#{gentoo_version}.tar.#{gentoo_compression_suffix}"
         if node[:gentoo][:mirror][:subdirectories]
-          gentoo_subdir = '/ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage3-amd64-systemd'
+          gentoo_subdir = 'download/gentoo-mirror/releases/amd64/autobuilds/current-stage3-amd64-systemd'
         end
       else
         raise "Unknown stage: #{download_gentoo_stage} (for release #{download_gentoo_release})"
@@ -46,7 +46,7 @@ define :download_gentoo do
           gentoo_checksum = '560f468051ecec0452d58d0ae0c8aa5c18991b80510e7cad5fed27a3c9f4e015'
           gentoo_basename = "stage4-amd64-hardened+cloud-#{gentoo_version}.tar.#{gentoo_compression_suffix}"
           if node[:gentoo][:mirror][:subdirectories]
-            gentoo_subdir = '/ftp/mirror/gentoo/releases/amd64/autobuilds/current-stage4-amd64-hardened+cloud'
+            gentoo_subdir = 'download/gentoo-mirror/releases/amd64/autobuilds/current-stage4-amd64-hardened+cloud'
           end
         else
           gentoo_checksum = 'a7be39029c8da7b7e82d3745affd0b3e6c63c8bf9b4a2f465045571d79b75244'
