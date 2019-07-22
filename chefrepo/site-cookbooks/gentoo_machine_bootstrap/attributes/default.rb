@@ -33,7 +33,7 @@ default[:gentoo] = {
   stage: 3,
   genkernel: true,
   mirror: {
-    path: 'http://mirror.switch.ch',
+    path: 'https://linux.rz.ruhr-uni-bochum.de',
     subdirectories: true
   },
   pkg_source: 'https://raw.githubusercontent.com/pr0d1r2/gentoo_machine_bootstrap-assets/master'
