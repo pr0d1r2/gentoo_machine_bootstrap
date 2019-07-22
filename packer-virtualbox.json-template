@@ -65,7 +65,7 @@
     {
       "type": "shell",
       "inline": [
-        "setup-apkrepos",
+        "setup-apkrepos -r",
         "apk update",
         "apk upgrade"
       ]
