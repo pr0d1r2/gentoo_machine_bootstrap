@@ -117,7 +117,7 @@
           }
         }
       },
-      "execute_command": "sed -i \"s|PACKER_CACHE_URL|`cat /packer_cache.url`|g\" {{.JsonPath}} && chef-solo --no-color -c {{.ConfigPath}} -j {{.JsonPath}}"
+      "execute_command": "sed -i \"s|PACKER_CACHE_URL|`cat /packer_cache.url`|g\" {{.JsonPath}} && chef-solo -c {{.ConfigPath}} -j {{.JsonPath}}"
     },
     {
       "type": "file",
