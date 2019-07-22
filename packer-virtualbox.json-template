@@ -85,7 +85,8 @@
       "type": "shell",
       "inline": [
         "apk add curl parted cryptsetup git bash ruby ruby-dev ruby-json build-base perl libffi-dev ca-certificates e2fsprogs xz",
-        "gem install --no-ri --no-rdoc mixlib-shellout chef berkshelf knife-supermarket io-console",
+        "gem install --no-ri --no-rdoc mixlib-shellout berkshelf knife-supermarket io-console",
+        "gem install --no-ri --no-rdoc chef -v '<15'",
         "apk del libffi-dev perl build-base",
         "rm -rf /var/cache/apk/*",
         "modprobe ext4"
